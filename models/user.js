@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true }
 })
 
+// prevent  from using the same email address twice
 userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', userSchema);
