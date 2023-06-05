@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// creation of Sauce model to add to the data base
 const sauceSchema = mongoose.Schema({
     userId: { type: String, required: true },
     name: { type: String, required: true },

@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 
 sauceCtrl = require('../controllers/sauce')
 
+//routes 
 router.get('/', auth, sauceCtrl.getSauces)
 router.get('/:id', auth, sauceCtrl.getOneSauce)
 
