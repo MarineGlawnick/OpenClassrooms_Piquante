@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express')
 const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce')
 const bodyParser = require('body-parser')
 const cors = require("cors")
 require('dotenv').config({ path: process.cwd() + '/.env' });
@@ -19,5 +20,6 @@ app.use(cors());
 app.use(bodyParser.json())
 
 app.use('/api/auth', userRoutes)
+app.use('/api/sauces', sauceRoutes)
 
 module.exports = app;
