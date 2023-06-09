@@ -1,3 +1,4 @@
+//creation of a const to store multer
 const multer = require('multer');
 
 const MIME_TYPES = {
