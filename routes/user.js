@@ -1,7 +1,10 @@
+// Import express
 const express = require('express');
+// Create route
 const router = express.Router();
-
+//Import controller
 const userCtrl = require('../controllers/user');
+//Import middleware
 const limiter = require("../middleware/rate-limiter")
 
 //routes

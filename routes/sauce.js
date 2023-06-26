@@ -1,8 +1,12 @@
 const express = require('express');
+//Create route
 const router = express.Router();
 
+// Importing middlewares
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config')
+
+// Import controller
 sauceCtrl = require('../controllers/sauce')
 
 //routes 

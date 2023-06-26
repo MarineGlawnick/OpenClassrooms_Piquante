@@ -1,20 +1,25 @@
+// Imports
 const Sauce = require('../models/sauce')
 const fs = require('fs');
 
+// Get all sauces
 exports.getSauces = (req, res, next) => {
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
         .catch(error => res.status(400).json({ error }));
 }
 
+// Get one sauce
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(404).json({ error }));
 };
 
+// Create a sauce 
 exports.createSauce = (req, res, next) => {
     const sauceObj = JSON.parse(req.body.sauce);
+    //create new instance of sauce
     const sauce = new Sauce({
         ...sauceObj,
         likes: 0,
@@ -23,6 +28,7 @@ exports.createSauce = (req, res, next) => {
         usersDisliked: [],
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     });
+    // Save the new sauce 
     sauce.save()
         .then(() => {
             res.status(201).json({ message: "Sauce créée avec succès" })
@@ -30,11 +36,14 @@ exports.createSauce = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+// Modifify a sauce
 exports.modifySauce = (req, res, next) => {
+    // create object to mdofify
     const sauceObj = req.file ? {
         ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     } : { ...req.body };
+    // uodate the sauce from paramater id
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
             Sauce.updateOne({ _id: req.params.id }, { ...sauceObj, _id: req.params.id })
@@ -46,10 +55,13 @@ exports.modifySauce = (req, res, next) => {
         });
 };
 
+//Delete a sauce 
 exports.deleteSauce = (req, res, next) => {
+    // search file name
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
             const filename = sauce.imageUrl.split('/images/')[1];
+            // delete from mangodb and the image folder
             fs.unlink(`images/${filename}`, () => {
                 Sauce.deleteOne({ _id: req.params.id })
                     .then(() => { res.status(200).json({ message: 'Objet supprimé !' }) })
@@ -61,6 +73,7 @@ exports.deleteSauce = (req, res, next) => {
         })
 };
 
+// Like or dislike a sauce 
 exports.likeOrDislike = (req, res, next) => {
     // Retrieve sauce id
     Sauce.findOne({ _id: req.params.id })
