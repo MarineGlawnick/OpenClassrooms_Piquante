@@ -21,6 +21,8 @@ const storage = multer.diskStorage({
             // remove extension from file name
             const filename = originalName.replace(`.${extension}`, '');
             callback(null, filename + "-" + Date.now() + '.' + extension);
+        } else {
+            console.error("Cette extension n'est pas supportée")
         }
     }
 });
