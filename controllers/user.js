@@ -1,11 +1,13 @@
+// import model
 const User = require('../models/user')
 
+// imports
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 
 // create new users
 exports.signup = (req, res, next) => {
-    //break the password into different part
+    // break the password into different part
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
@@ -20,7 +22,7 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-//create the connexion for registered users
+// create the connexion for registered users
 exports.login = (req, res, next) => {
     // look for a user into the data base
     User.findOne({ email: req.body.email })
@@ -29,7 +31,7 @@ exports.login = (req, res, next) => {
             if (!user) {
                 return res.status(401).json({ error: 'Utilisateur non trouvé !' });
             }
-            //comparison of password the one in the form and the one registered into the data base
+            // comparison of password the one in the form and the one registered into the data base
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                     if (!valid) {

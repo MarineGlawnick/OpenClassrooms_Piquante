@@ -1,15 +1,16 @@
+// import express
 const express = require('express');
-//Create route
+// create route
 const router = express.Router();
 
-// Importing middlewares
+// import middlewares
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config')
 
-// Import controller
+// import controller
 sauceCtrl = require('../controllers/sauce')
 
-//routes 
+// routes 
 router.post('/:id/like', auth, sauceCtrl.likeOrDislike)
 router.delete('/:id', auth, multer, sauceCtrl.deleteSauce)
 router.put('/:id', auth, multer, sauceCtrl.modifySauce)

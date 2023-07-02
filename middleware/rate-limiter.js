@@ -1,7 +1,7 @@
-// Import 
+// import 
 const rateLimiter = require("express-rate-limit")
 
-// Limit to only 5 requests per IP address every 10 secondes
+// limit to only 5 requests per IP address every 10 secondes
 const limiter = rateLimiter({
     max: 5,
     windowMS: 1000,
