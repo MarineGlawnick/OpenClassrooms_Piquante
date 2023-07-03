@@ -18,5 +18,5 @@ Voici quelques étapes avant de lancer le projet:
 - Télécharger Node.js si besoin
 - Ouvrir le backend et faire cette ligne de commande `npm install`
 - Rentrez vos données d'environnement grâce à l'exemple dans `.env.example`
-- Vous pouvez ensuite lancer le serveur soit avec `nodemon server` ou `ng server`
+- Vous pouvez ensuite lancer le serveur soit avec `nodemon server`
  
